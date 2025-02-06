@@ -38,7 +38,7 @@ nominal_pairs <- combn(nominal_vars, 2, simplify = FALSE)    # All the pairs bet
 variable_associations <- data.frame(
   Var1 = character(length(nominal_pairs)),
   Var2 = character(length(nominal_pairs)),
-  CramersV = numeric(length(nominal_pairs)),
+  Association = numeric(length(nominal_pairs)),
   Type = character(length(nominal_pairs)),
   stringsAsFactors = FALSE
 )
@@ -57,7 +57,7 @@ for(i in 1:length(nominal_pairs)){
   variable_associations[i, ] <- list(
     Var1 = var1,
     Var2 = var2,
-    CramersV = cramers_value,
+    Association = cramers_value,
     Type = "Nominal"
   )
 }
@@ -68,11 +68,14 @@ correlation_value <- cor(Fbis$V2, Fbis$V9)
 # Adding it to the tab results
 variable_associations <- rbind(
   variable_associations,
-  data.frame(Var1 = "V2", Var2 = "V9", CramersV = correlation_value, Type = "Numeric")
+  data.frame(Var1 = "V2", Var2 = "V9", Association = correlation_value, Type = "Numeric")
 )
 
-# Printing final tab le tableau final
+# Printing final tab (terminal)
 print(variable_associations)
+
+# Print in a new tab
+View(variable_associations)
 #############################################################################################
 
 
